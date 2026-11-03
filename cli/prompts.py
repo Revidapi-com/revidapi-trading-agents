@@ -322,8 +322,32 @@ def select_openrouter_model(mode: str, default=None) -> str:
                               "Please enter a model ID."))
 
 
+# Tool-only models that are not meant for agent chat.
+_REVIDAPI_SKIP = ("codex-",)
+
+
+def select_revidapi_model(mode: str, default=None) -> str:
+    """Select a RevidAPI chat model (listed live from /v1/models) or enter one."""
+    import requests
+    try:
+        resp = requests.get("https://revidapi.com/v1/models", timeout=10)
+        resp.raise_for_status()
+        # The list also carries image models; keep available chat models only.
+        models = [(m.get("display_name") or m["id"], m["id"]) for m in resp.json().get("data", [])
+                  if m.get("kind") == "chat" and m.get("available", True)
+                  and not m["id"].startswith(_REVIDAPI_SKIP)]
+    except Exception as e:
+        console.print(f"\n[yellow]Could not fetch RevidAPI models: {e}[/yellow]")
+        models = []
+    return _select_listed_model(
+        f"Select Your [{mode.title()}-Thinking] RevidAPI Model:", models, default,
+        lambda: _require_text("Enter RevidAPI model ID (e.g. claude-sonnet-5-5):",
+                              "Please enter a model ID."))
+
+
 # Providers whose models are listed live, with the menu that offers them.
-LISTED_LIVE = {"openrouter": select_openrouter_model, "chatgpt": select_chatgpt_model}
+LISTED_LIVE = {"openrouter": select_openrouter_model, "chatgpt": select_chatgpt_model,
+               "revidapi": select_revidapi_model}
 
 
 def _prompt_custom_model_id() -> str:
@@ -385,6 +409,7 @@ def _llm_provider_table() -> list[tuple[str, str, str | None]]:
     """
     ollama_url = os.environ.get("OLLAMA_BASE_URL") or "http://localhost:11434/v1"
     return [
+        ("RevidAPI (Claude, GPT, Gemini with one key)", "revidapi", "https://revidapi.com/v1"),
         ("OpenAI", "openai", "https://api.openai.com/v1"),
         ("Google", "google", None),
         ("Anthropic", "anthropic", "https://api.anthropic.com/"),

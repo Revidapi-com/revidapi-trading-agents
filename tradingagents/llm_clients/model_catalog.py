@@ -202,6 +202,25 @@ MODEL_OPTIONS: ProviderModeOptions = {
     # Generic OpenAI-compatible endpoint: the model is whatever the user's
     # server serves, so only "Custom model ID" is offered.
     "openai_compatible": _CUSTOM_ONLY,
+    # Offline fallback; the CLI lists the current models live from /v1/models.
+    "revidapi": {
+        "quick": [
+            ("Claude Sonnet 5.5", "claude-sonnet-5-5"),
+            ("Claude Haiku 5.5", "claude-haiku-5-5"),
+            ("GPT-6 Luna", "gpt-6-luna"),
+            ("Gemini 3.8 Flash", "gemini-3.8-flash"),
+            ("DeepSeek V4.1 Flash", "deepseek-v4.1-flash"),
+            ("Custom model ID", "custom"),
+        ],
+        "deep": [
+            ("Claude Opus 5.5", "claude-opus-5-5"),
+            ("Claude Fable 5.1", "claude-fable-5-1"),
+            ("GPT-6.1 Sol", "gpt-6.1-sol"),
+            ("Grok 4.7", "grok-4.7"),
+            ("DeepSeek V4 Pro", "deepseek-v4-pro"),
+            ("Custom model ID", "custom"),
+        ],
+    },
     # Hosted OpenAI-compatible providers that serve many (and frequently
     # changing) models — offer "Custom model ID" rather than a list that goes
     # stale. The endpoint + key are wired by the provider; the user picks the

@@ -27,6 +27,49 @@
 
 ---
 
+> **This is a fork of [TauricResearch/TradingAgents](https://github.com/TauricResearch/TradingAgents)** (Apache-2.0), maintained by [RevidAPI](https://revidapi.com). It adds a `revidapi` provider so all agents can run on Claude, GPT, Gemini, Grok or DeepSeek with **one API key**. Everything else is the upstream project, unchanged.
+
+## Quick start with RevidAPI
+
+1. Sign up at [revidapi.com](https://revidapi.com) and copy your API key (new accounts get free credits to try it).
+2. Install and run:
+
+```bash
+git clone https://github.com/Revidapi-com/TradingAgents.git
+cd TradingAgents
+pip install .
+export REVIDAPI_API_KEY=sk_your_key
+tradingagents          # choose "RevidAPI" in the provider menu
+```
+
+Or from Python:
+
+```python
+from tradingagents.graph.trading_graph import TradingAgentsGraph
+from tradingagents.default_config import DEFAULT_CONFIG
+
+config = DEFAULT_CONFIG.copy()
+config["llm_provider"] = "revidapi"
+config["deep_think_llm"] = "claude-opus-5-5"     # research manager, risk judge
+config["quick_think_llm"] = "claude-sonnet-5-5"  # analysts, debaters
+
+ta = TradingAgentsGraph(debug=True, config=config)
+_, decision = ta.propagate("NVDA", "2026-01-15")
+print(decision)
+```
+
+Any chat model RevidAPI sells works with the same key, for example:
+
+| Role | Good picks |
+|---|---|
+| Deep thinking | `claude-opus-5-5`, `claude-fable-5-1`, `gpt-6.1-sol`, `grok-4.7`, `deepseek-v4-pro` |
+| Quick thinking | `claude-sonnet-5-5`, `claude-haiku-5-5`, `gpt-6-luna`, `gemini-3.8-flash`, `deepseek-v4.1-flash` |
+
+Never commit your key: keep it in `.env` (already git-ignored) or your shell environment.
+
+The same switch works with environment variables only: `TRADINGAGENTS_LLM_PROVIDER=revidapi`, `TRADINGAGENTS_DEEP_THINK_LLM=...`, `TRADINGAGENTS_QUICK_THINK_LLM=...`. The full model list is public at [revidapi.com/v1/models](https://revidapi.com/v1/models). Market data still comes from the upstream sources (yfinance, Alpha Vantage, SEC EDGAR, FRED).
+
+
 # TradingAgents: Multi-Agents LLM Financial Trading Framework
 
 ## News
