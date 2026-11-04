@@ -1,4 +1,4 @@
-"""What's new, for the person at the terminal: a newer release, and notices from Tauric Research.
+"""What's new, for the person at the terminal: a newer release, and release notes from RevidAPI.
 
 At most once a day a background thread asks GitHub for the latest release and
 the announcements server for notices, and writes the answers to a small cache.
@@ -27,8 +27,9 @@ from packaging.version import InvalidVersion, Version
 from tradingagents.dataflows.files import replace_file
 from tradingagents.default_config import _TRADINGAGENTS_HOME
 
-RELEASES_URL = "https://api.github.com/repos/TauricResearch/TradingAgents/releases/latest"
-NOTICES_URL = "https://api.tauric.ai/v1/announcements"
+RELEASES_URL = "https://api.github.com/repos/Revidapi-com/revidapi-trading-agents/releases/latest"
+# Không nhận thông báo từ máy chủ bên thứ ba: chỗ này in thẳng ra terminal của người dùng.
+NOTICES_URL = ""
 CACHE = Path(_TRADINGAGENTS_HOME) / "update_check.json"
 CHECK_EVERY = 24 * 3600
 TIMEOUT = 2.0
@@ -102,7 +103,7 @@ def refresh(now: float | None = None) -> None:
     except Exception:
         pass
     try:
-        notices = parse_notices(_get_json(NOTICES_URL))
+        notices = parse_notices(_get_json(NOTICES_URL)) if NOTICES_URL else None
         if notices is not None:
             cache["notices"] = notices
     except Exception:
@@ -185,7 +186,7 @@ def upgrade_command(dist=None) -> str | None:
     if os.name == "nt":                    # the commands below are POSIX shell
         return None
     try:
-        dist = dist or importlib.metadata.distribution("tradingagents")
+        dist = dist or importlib.metadata.distribution("revidapi-trading-agents")
         direct = json.loads(dist.read_text("direct_url.json") or "null")
         installer = (dist.read_text("INSTALLER") or "").strip()
     except (importlib.metadata.PackageNotFoundError, OSError, ValueError):

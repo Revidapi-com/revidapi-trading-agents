@@ -18,12 +18,11 @@ from tradingagents.reporting import analyst_names
 # Ratings by direction, so the page can show which way the call leans.
 _TONE = {"Buy": "up", "Overweight": "up", "Hold": "level", "Underweight": "down", "Sell": "down"}
 
-# The Tauric Research logo as published (tauric.ai/brand/tauric-logo.svg), drawn
-# in the page so it loads nothing.
-_LOGO = files("tradingagents").joinpath("assets/tauric-logo.svg").read_text(encoding="utf-8").strip()
-_COMPANY = "https://tauric.ai"
-_ORG = "https://github.com/TauricResearch"
-_PROJECT = f"{_ORG}/TradingAgents"
+# RevidAPI logo, drawn in the page so it loads nothing.
+_LOGO = files("tradingagents").joinpath("assets/revidapi-logo.svg").read_text(encoding="utf-8").strip()
+_COMPANY = "https://revidapi.com"
+_ORG = "https://revidapi.com"
+_PROJECT = "https://github.com/Revidapi-com/revidapi-trading-agents"
 
 _CSS = """
 :root {
@@ -288,7 +287,7 @@ def render_report(ticker: str, final_state: dict, settings: dict | None, parts) 
 <body>
 <div class="page" id="top">
 <header class="masthead">
-<a class="logo" href="{_COMPANY}" rel="noopener" aria-label="Tauric Research">{_LOGO}</a>
+<a class="logo" href="{_COMPANY}" rel="noopener" aria-label="RevidAPI">{_LOGO}</a>
 <h1>{title}</h1>
 <p class="date">{escape(f"Analysis of {date}" if date else "Analysis")}</p>
 <dl class="run">{details}</dl>
@@ -297,7 +296,7 @@ def render_report(ticker: str, final_state: dict, settings: dict | None, parts) 
 <main>
 {"".join(body)}
 </main>
-<footer class="credit"><a href="{_PROJECT}" rel="noopener">TradingAgents</a> powered by <a class="brand" href="{_ORG}" rel="noopener">Tauric Research</a></footer>
+<footer class="credit"><a href="{_PROJECT}" rel="noopener">RevidAPI Trading Agents</a> powered by <a class="brand" href="{_ORG}" rel="noopener">RevidAPI</a></footer>
 </div>
 <a class="to-top" href="#top">Top</a>
 </body>

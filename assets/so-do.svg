@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" font-family="Inter,Segoe UI,Arial,sans-serif">
+  <rect width="1200" height="420" rx="18" fill="#0f172a"/>
+  <defs><marker id="m" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#94a3b8"/></marker></defs>
+  <text x="40" y="52" fill="#f8fafc" font-size="24" font-weight="700">RevidAPI Trading Agents</text>
+  <text x="40" y="80" fill="#94a3b8" font-size="15">Mỗi agent gọi model qua https://revidapi.com/v1 — một key cho Claude, GPT, Gemini, Grok, DeepSeek</text>
+  <g font-size="15" fill="#e2e8f0">
+    <rect x="40" y="120" width="210" height="250" rx="14" fill="#1e293b" stroke="#2563eb"/>
+    <text x="60" y="152" font-weight="700" fill="#60a5fa">1 · Phân tích</text>
+    <text x="60" y="190">Thị trường &amp; kỹ thuật</text>
+    <text x="60" y="222">Mạng xã hội</text>
+    <text x="60" y="254">Tin tức</text>
+    <text x="60" y="286">Báo cáo tài chính</text>
+    <rect x="300" y="120" width="210" height="250" rx="14" fill="#1e293b" stroke="#f59e0b"/>
+    <text x="320" y="152" font-weight="700" fill="#fbbf24">2 · Tranh luận</text>
+    <rect x="320" y="175" width="170" height="60" rx="10" fill="#14532d"/><text x="345" y="211" fill="#bbf7d0">Phe tăng giá</text>
+    <rect x="320" y="255" width="170" height="60" rx="10" fill="#7f1d1d"/><text x="345" y="291" fill="#fecaca">Phe giảm giá</text>
+    <rect x="560" y="160" width="180" height="170" rx="14" fill="#1e293b" stroke="#a855f7"/>
+    <text x="580" y="192" font-weight="700" fill="#c084fc">3 · Trader</text>
+    <text x="580" y="230">Đề xuất lệnh</text>
+    <text x="580" y="258">mua / giữ / bán</text>
+    <rect x="790" y="120" width="180" height="250" rx="14" fill="#1e293b" stroke="#ef4444"/>
+    <text x="810" y="152" font-weight="700" fill="#f87171">4 · Rủi ro</text>
+    <text x="810" y="190">Mạo hiểm</text>
+    <text x="810" y="222">Trung lập</text>
+    <text x="810" y="254">Thận trọng</text>
+    <rect x="1020" y="160" width="140" height="170" rx="14" fill="#2563eb"/>
+    <text x="1040" y="192" font-weight="700" fill="#fff">5 · Quyết</text>
+    <text x="1040" y="230" fill="#dbeafe">Quản lý</text>
+    <text x="1040" y="258" fill="#dbeafe">danh mục</text>
+  </g>
+  <g stroke="#94a3b8" stroke-width="2" marker-end="url(#m)">
+    <line x1="252" y1="245" x2="296" y2="245"/><line x1="512" y1="245" x2="556" y2="245"/>
+    <line x1="742" y1="245" x2="786" y2="245"/><line x1="972" y1="245" x2="1016" y2="245"/>
+  </g>
+  <text x="40" y="402" fill="#64748b" font-size="12">Dựa trên mã nguồn mở TradingAgents (Apache-2.0). Chỉ để nghiên cứu, không phải lời khuyên đầu tư.</text>
+</svg>

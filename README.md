@@ -1,48 +1,38 @@
 <p align="center">
-  <img src="tradingagents/assets/tauric-logo.svg" width="60%" alt="Tauric Research">
+  <img src="tradingagents/assets/revidapi-logo.svg" width="320" alt="RevidAPI">
 </p>
 
-<div align="center" style="line-height: 1;">
-  <a href="https://arxiv.org/abs/2412.20138" target="_blank"><img alt="arXiv" src="https://img.shields.io/badge/arXiv-2412.20138-B31B1B?logo=arxiv"/></a>
-  <a href="https://discord.com/invite/hk9PGKShPK" target="_blank"><img alt="Discord" src="https://img.shields.io/badge/Discord-TradingResearch-7289da?logo=discord&logoColor=white&color=7289da"/></a>
-  <a href="https://x.com/TauricResearch" target="_blank"><img alt="X Follow" src="https://img.shields.io/badge/X-TauricResearch-white?logo=x&logoColor=white"/></a>
-  <a href="https://github.com/TauricResearch/" target="_blank"><img alt="Community" src="https://img.shields.io/badge/GitHub_Community-TauricResearch-14C290?logo=discourse"/></a>
-</div>
-<br>
-<div align="center">
-  <a href="https://github.com/TauricResearch" target="_blank"><img alt="TradingAgents #1 Repository of the Day" src="https://trendshift.io/api/badge/repositories/16192" width="250" height="55"/></a>
-</div>
-<br>
-<div align="center">
-  <!-- Keep these links. Translations will automatically update with the README. -->
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=de">Deutsch</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=es">Español</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=fr">français</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=ja">日本語</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=ko">한국어</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=pt">Português</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=ru">Русский</a> | 
-  <a href="https://www.readme-i18n.com/TauricResearch/TradingAgents?lang=zh">中文</a>
-</div>
+<h1 align="center">RevidAPI Trading Agents</h1>
+
+<p align="center">
+  Nhóm AI phân tích cổ phiếu, crypto và ra quyết định giao dịch: phân tích viên → tranh luận tăng/giảm → trader → quản trị rủi ro → quản lý danh mục.<br>
+  <b>Một key RevidAPI chạy được Claude, GPT, Gemini, Grok, DeepSeek.</b>
+</p>
+
+<p align="center">
+  <a href="https://revidapi.com"><img alt="RevidAPI" src="https://img.shields.io/badge/RevidAPI-lấy_key_dùng_thử-2563eb"></a>
+  <a href="https://revidapi.com/v1/chat/models"><img alt="Models" src="https://img.shields.io/badge/models-Claude%20·%20GPT%20·%20Gemini%20·%20Grok%20·%20DeepSeek-0f172a"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache--2.0-64748b"></a>
+</p>
 
 ---
 
-> **This is a fork of [TauricResearch/TradingAgents](https://github.com/TauricResearch/TradingAgents)** (Apache-2.0), maintained by [RevidAPI](https://revidapi.com). It adds a `revidapi` provider so all agents can run on Claude, GPT, Gemini, Grok or DeepSeek with **one API key**. Everything else is the upstream project, unchanged.
+## Bắt đầu nhanh
 
-## Quick start with RevidAPI
-
-1. Sign up at [revidapi.com](https://revidapi.com) and copy your API key (new accounts get free credits to try it).
-2. Install and run:
+1. Đăng ký tại [revidapi.com](https://revidapi.com) và copy API key (tài khoản mới có credit dùng thử).
+2. Cài và chạy:
 
 ```bash
-git clone https://github.com/Revidapi-com/TradingAgents.git
-cd TradingAgents
+git clone https://github.com/Revidapi-com/revidapi-trading-agents.git
+cd revidapi-trading-agents
 pip install .
-export REVIDAPI_API_KEY=sk_your_key
-tradingagents          # choose "RevidAPI" in the provider menu
+export REVIDAPI_API_KEY=sk_key_cua_ban
+revidapi-trade         # chọn "RevidAPI" ở menu provider
 ```
 
-Or from Python:
+Windows PowerShell: `$env:REVIDAPI_API_KEY="sk_key_cua_ban"` rồi `revidapi-trade`.
+
+Hoặc gọi từ Python:
 
 ```python
 from tradingagents.graph.trading_graph import TradingAgentsGraph
@@ -50,123 +40,50 @@ from tradingagents.default_config import DEFAULT_CONFIG
 
 config = DEFAULT_CONFIG.copy()
 config["llm_provider"] = "revidapi"
-config["deep_think_llm"] = "claude-opus-5-5"     # research manager, risk judge
-config["quick_think_llm"] = "claude-sonnet-5-5"  # analysts, debaters
+config["deep_think_llm"] = "claude-opus-5-5"     # quản lý nghiên cứu, trọng tài rủi ro
+config["quick_think_llm"] = "claude-sonnet-5-5"  # phân tích viên, tranh luận
 
 ta = TradingAgentsGraph(debug=True, config=config)
 _, decision = ta.propagate("NVDA", "2026-01-15")
 print(decision)
 ```
 
-Any chat model RevidAPI sells works with the same key, for example:
-
-| Role | Good picks |
+| Vai trò | Gợi ý model |
 |---|---|
-| Deep thinking | `claude-opus-5-5`, `claude-fable-5-1`, `gpt-6.1-sol`, `grok-4.7`, `deepseek-v4-pro` |
-| Quick thinking | `claude-sonnet-5-5`, `claude-haiku-5-5`, `gpt-6-luna`, `gemini-3.7-flash`, `deepseek-v4.1-flash` |
+| Suy nghĩ sâu | `claude-opus-5-5`, `claude-fable-5-1`, `gpt-6.1-sol`, `grok-4.7`, `deepseek-v4-pro` |
+| Suy nghĩ nhanh | `claude-sonnet-5-5`, `claude-haiku-5-5`, `gpt-6-luna`, `gemini-3.7-flash`, `deepseek-v4.1-flash` |
 
-Never commit your key: keep it in `.env` (already git-ignored) or your shell environment.
+Danh sách model đầy đủ: [revidapi.com/v1/chat/models](https://revidapi.com/v1/chat/models). Chỉ dùng biến môi trường cũng được: `TRADINGAGENTS_LLM_PROVIDER=revidapi`, `TRADINGAGENTS_DEEP_THINK_LLM=...`, `TRADINGAGENTS_QUICK_THINK_LLM=...`.
 
-The same switch works with environment variables only: `TRADINGAGENTS_LLM_PROVIDER=revidapi`, `TRADINGAGENTS_DEEP_THINK_LLM=...`, `TRADINGAGENTS_QUICK_THINK_LLM=...`. The full model list is public at [revidapi.com/v1/chat/models](https://revidapi.com/v1/chat/models). Market data still comes from the upstream sources (yfinance, Alpha Vantage, SEC EDGAR, FRED).
+**Đừng commit key:** để trong `.env` (đã nằm trong `.gitignore`) hoặc biến môi trường.
 
-
-# TradingAgents: Multi-Agents LLM Financial Trading Framework
-
-## News
-
-<!-- news:start -->
-- [2026-10] **TradingAgents v0.7.1** released with decisions scored only on final closes and settled across long market holidays, a fix for model dates that could read filings made after the run date, and fixes to portfolios, prices, SEC statements and reports.
-- [2026-10] **TradingAgents v0.7.0** released with runs on your own ChatGPT Plus or Pro plan, backtests scored from the first close after each decision, a note at start-up when a newer release is out, and a wheel attached to each GitHub release.
-- [2026-10] **TradingAgents v0.6.0** released with reports saved as one HTML page, a provider per model tier so the managers and analysts can run on different models, past decisions settled for every ticker while the analysts work, and company news read from Yahoo search while Yahoo's news feed is down.
-
-Full release notes are in [CHANGELOG.md](CHANGELOG.md).
-
-<details>
-<summary>Earlier news</summary>
-
-- [2026-09] **TradingAgents v0.5.2** released with parallel analysts for a faster analysis, a CLI that runs without prompts from flags such as `--ticker` and `--date`, the run's settings recorded in every report, and backtests that see only data published by each analysis date.
-- [2026-09] **TradingAgents v0.5.1** released with a package layout organised by what each module holds (import paths moved), optional Jev screening of social posts, GPT-6 Sol and Luna as the default models, and fixes to run isolation and SEC EDGAR statements.
-- [2026-09] **TradingAgents v0.5.0** released with point-in-time integrity across every dated path, SEC EDGAR fundamentals served as filed, backtesting over a ticker and date grid, portfolio-aware runs, and current model lineups across every provider.
-- [2026-08] **TradingAgents v0.4.0** released with look-ahead / point-in-time fixes across FRED macro, social sentiment, and the decision-log memory; clearer decision signals; working CLI checkpoint resume; Trader price grounding; and the GPT-5.6 and GLM-5.3 models.
-- [2026-07] **TradingAgents v0.3.1** released with correctness and stability fixes: Alpha Vantage look-ahead filtering, graph-router crash-safety, graph-shape-aware checkpoint resume, working crypto sentiment sources, a configurable LLM retry budget, Bedrock API-key auth, and Claude Sonnet 5 / Fable 5 support.
-- [2026-06] **TradingAgents v0.3.0** released with a verified data-access contract, an expanded provider registry (NVIDIA, Kimi, Groq, Mistral, Bedrock, and any OpenAI-compatible endpoint), FRED and Polymarket data vendors, a current-generation model catalog, and a CI gate.
-- [2026-05] **TradingAgents v0.2.5** released with the grounded Sentiment Analyst, GPT-5.5 etc. model coverage, Qwen/GLM/MiniMax dual-region support, `TRADINGAGENTS_*` env-var configurability with API-key auto-detection, remote Ollama support, non-US alpha benchmarks, and ticker path-traversal hardening.
-- [2026-04] **TradingAgents v0.2.4** released with structured-output agents (Research Manager, Trader, Portfolio Manager), LangGraph checkpoint resume, persistent decision log, DeepSeek/Qwen/GLM/Azure provider support, Docker, and a Windows UTF-8 encoding fix.
-- [2026-03] **TradingAgents v0.2.3** released with multi-language support, GPT-5.4 family models, unified model catalog, backtesting date fidelity, and proxy support.
-- [2026-03] **TradingAgents v0.2.2** released with GPT-5.4/Gemini 3.1/Claude 4.6 model coverage, five-tier rating scale, OpenAI Responses API, Anthropic effort control, and cross-platform stability.
-- [2026-02] **TradingAgents v0.2.0** released with multi-provider LLM support (GPT-5.x, Gemini 3.x, Claude 4.x, Grok 4.x) and improved system architecture.
-- [2026-01] **Trading-R1** [Technical Report](https://arxiv.org/abs/2509.11420) released, with [Terminal](https://github.com/TauricResearch/Trading-R1) expected to land soon.
-
-</details>
-<!-- news:end -->
-
-<div align="center">
-
-🚀 [TradingAgents](#tradingagents-framework) | ⚡ [Installation & CLI](#installation-and-cli) | 🎬 [Demo](https://www.youtube.com/watch?v=90gr5lwjIho) | 📦 [Package Usage](#tradingagents-package) | 🤝 [Contributing](#contributing) | 📄 [Citation](#citation)
-
-</div>
-
-> 🎉 **TradingAgents** officially released! We have received numerous inquiries about the work, and we would like to express our thanks for the enthusiasm in our community.
->
-> So we decided to fully open-source the framework. Looking forward to building impactful projects with you!
-
-## TradingAgents Framework
-
-TradingAgents is a multi-agent trading framework that mirrors the dynamics of real-world trading firms. By deploying specialized LLM-powered agents: from fundamental analysts, sentiment experts, and technical analysts, to trader, risk management team, the platform collaboratively evaluates market conditions and informs trading decisions. Moreover, these agents engage in dynamic discussions to pinpoint the optimal strategy.
+## Cách hoạt động
 
 <p align="center">
-  <img src="assets/schema.png" style="width: 100%; height: auto;">
+  <img src="assets/so-do.svg" width="100%" alt="Sơ đồ RevidAPI Trading Agents">
 </p>
 
-> TradingAgents framework is designed for research purposes. Trading performance may vary based on many factors, including the chosen backbone language models, model temperature, trading periods, the quality of data, and other non-deterministic factors. [It is not intended as financial, investment, or trading advice.](https://tauric.ai/disclaimer/)
+- **Phân tích viên** (chạy song song): kỹ thuật (MACD, RSI…), mạng xã hội (StockTwits, Reddit), tin tức và vĩ mô, báo cáo tài chính (SEC EDGAR).
+- **Tranh luận**: phe tăng giá và phe giảm giá phản biện nhau dựa trên báo cáo.
+- **Trader**: tổng hợp và đề xuất mua / giữ / bán, thời điểm, khối lượng.
+- **Quản trị rủi ro**: ba góc nhìn mạo hiểm / trung lập / thận trọng.
+- **Quản lý danh mục**: duyệt hoặc bác đề xuất, ghi quyết định.
 
-Our framework decomposes complex trading tasks into specialized roles.
+> Chỉ dùng cho nghiên cứu. Kết quả phụ thuộc model, dữ liệu và khoảng thời gian, **không phải lời khuyên đầu tư**.
 
-### Analyst Team
-- Fundamentals Analyst: Evaluates company financials and performance metrics, identifying intrinsic values and potential red flags.
-- Sentiment Analyst: Aggregates news headlines, StockTwits, and Reddit chatter into a single sentiment read to gauge short-term market mood.
-- News Analyst: Monitors global news and macroeconomic indicators, interpreting the impact of events on market conditions.
-- Technical Analyst: Utilizes technical indicators (like MACD and RSI) to detect trading patterns and forecast price movements.
-
-The selected analysts work at the same time, each on its own tools, and the research debate starts once all of their reports are in.
-
-<p align="center">
-  <img src="assets/analyst.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-### Researcher Team
-- Comprises both bullish and bearish researchers who critically assess the insights provided by the Analyst Team. Through structured debates, they balance potential gains against inherent risks.
-
-<p align="center">
-  <img src="assets/researcher.png" width="70%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-### Trader Agent
-- Composes reports from the analysts and researchers to make informed trading decisions, determining the timing and magnitude of trades.
-
-<p align="center">
-  <img src="assets/trader.png" width="70%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-### Risk Management and Portfolio Manager
-- Continuously evaluates portfolio risk by assessing market volatility, liquidity, and other risk factors. The risk management team evaluates and adjusts trading strategies, providing assessment reports to the Portfolio Manager for final decision.
-- The Portfolio Manager approves/rejects the transaction proposal. If approved, the order will be sent to the simulated exchange and executed.
-
-<p align="center">
-  <img src="assets/risk.png" width="70%" style="display: inline-block; margin: 0 2%;">
-</p>
+Dữ liệu thị trường lấy từ yfinance, Alpha Vantage, SEC EDGAR, FRED.
 
 ## Installation and CLI
 
 ### Installation
 
-Clone TradingAgents:
+Clone RevidAPI Trading Agents:
 ```bash
-git clone https://github.com/TauricResearch/TradingAgents.git
-cd TradingAgents
+git clone https://github.com/Revidapi-com/revidapi-trading-agents.git
+cd revidapi-trading-agents
 ```
 
-TradingAgents needs Python 3.11 or later. Create a virtual environment in any of your favorite environment managers:
+RevidAPI Trading Agents needs Python 3.11 or later. Create a virtual environment in any of your favorite environment managers:
 ```bash
 conda create -n tradingagents python=3.13
 conda activate tradingagents
@@ -202,7 +119,7 @@ docker compose --profile ollama run --rm tradingagents-ollama
 
 ### Required APIs
 
-TradingAgents supports multiple LLM providers. Set the API key for your chosen provider:
+RevidAPI Trading Agents supports multiple LLM providers. Set the API key for your chosen provider:
 
 ```bash
 export OPENAI_API_KEY=...          # OpenAI (GPT)
@@ -228,7 +145,7 @@ export TYPESAFE_API_KEY=...        # Jev social-post screening (optional)
 
 For Azure OpenAI, copy `.env.enterprise.example` to `.env.enterprise` and fill in your credentials. With Docker, put these keys in `.env` instead: the image does not include `.env` files.
 
-To run on your ChatGPT Plus or Pro plan instead of an API key, choose "Subscription" in the CLI's provider menu, or set `llm_provider: "chatgpt"`. Sign in once with `tradingagents login chatgpt`: it prints an address to open in your browser, which returns to this machine on `127.0.0.1`. When the browser runs on another machine, or TradingAgents runs in Docker (`docker compose run --rm tradingagents login chatgpt`), paste the address the browser ends up on. The sign-in is kept in `~/.tradingagents/chatgpt-auth.json`, and `tradingagents logout chatgpt` revokes it. Runs count toward your plan's usage limits, and the plan does not accept `temperature` or `max_tokens`.
+To run on your ChatGPT Plus or Pro plan instead of an API key, choose "Subscription" in the CLI's provider menu, or set `llm_provider: "chatgpt"`. Sign in once with `tradingagents login chatgpt`: it prints an address to open in your browser, which returns to this machine on `127.0.0.1`. When the browser runs on another machine, or RevidAPI Trading Agents runs in Docker (`docker compose run --rm tradingagents login chatgpt`), paste the address the browser ends up on. The sign-in is kept in `~/.tradingagents/chatgpt-auth.json`, and `tradingagents logout chatgpt` revokes it. Runs count toward your plan's usage limits, and the plan does not accept `temperature` or `max_tokens`.
 
 For AWS Bedrock, install the extra with `pip install ".[bedrock]"`, set `llm_provider: "bedrock"`, configure AWS credentials (environment variables, `~/.aws/credentials`, or an IAM role) and `AWS_DEFAULT_REGION`, and use a Bedrock model ID, e.g. `us.anthropic.claude-opus-5-5`.
 
@@ -247,7 +164,7 @@ cp .env.example .env
 
 Launch the interactive CLI:
 ```bash
-tradingagents          # installed command
+revidapi-trade          # installed command
 python -m cli.main     # alternative: run directly from source
 ```
 You will see a screen where you can select your desired tickers, analysis date, LLM provider, research depth, and more. Your previous run's answers come back as the defaults, so pressing Enter accepts them. The `TRADINGAGENTS_*` variables in `.env` still skip their step entirely.
@@ -256,17 +173,17 @@ To run without questions, for a scheduled job or a script, answer the per-run st
 ```bash
 export TRADINGAGENTS_LLM_PROVIDER=openai TRADINGAGENTS_QUICK_THINK_LLM=gpt-6-luna TRADINGAGENTS_DEEP_THINK_LLM=gpt-6-sol
 export TRADINGAGENTS_OUTPUT_LANGUAGE=English TRADINGAGENTS_MAX_DEBATE_ROUNDS=1 TRADINGAGENTS_MAX_RISK_ROUNDS=1
-tradingagents --ticker NVDA --date 2026-09-23 --analysts market,news,fundamentals --save --no-show
+revidapi-trade --ticker NVDA --date 2026-09-23 --analysts market,news,fundamentals --save --no-show
 ```
 Each flag skips only its own question. Run without a terminal, a missing answer stops the run before it starts and names the flag or variable to set.
 
-At start-up the interactive CLI mentions a newer release and notices from Tauric Research. It checks at most once a day, in the background, and sends nothing about your runs; set `TRADINGAGENTS_NO_UPDATE_CHECK=1` to turn it off. Runs without a terminal never check.
+At start-up the interactive CLI mentions a newer release and release notes from RevidAPI. It checks at most once a day, in the background, and sends nothing about your runs; set `TRADINGAGENTS_NO_UPDATE_CHECK=1` to turn it off. Runs without a terminal never check.
 
 A saved report also includes `complete_report.html`, the report as one page with its sections listed beside the text, for reading in a browser, on a phone or in print. Answering the save question at the prompt also asks about the page and can open it in your browser; `--no-html` skips it, and so does `ta.save_reports(state, "NVDA", html=False)` from Python.
 
 ### Markets and tickers
 
-TradingAgents works with any market Yahoo Finance covers, using the exchange-suffixed ticker. Company identity and the alpha benchmark resolve automatically per market.
+RevidAPI Trading Agents works with any market Yahoo Finance covers, using the exchange-suffixed ticker. Company identity and the alpha benchmark resolve automatically per market.
 
 - US: `AAPL`, `SPY`
 - Hong Kong: `0700.HK` · Tokyo: `7203.T` · London: `AZN.L`
@@ -274,29 +191,17 @@ TradingAgents works with any market Yahoo Finance covers, using the exchange-suf
 - China A-shares: Shanghai `.SS`, Shenzhen `.SZ` (e.g. `600519.SS` for Kweichow Moutai)
 - Crypto: `BTC-USD`, `ETH-USD`
 
-<p align="center">
-  <img src="assets/cli/cli_init.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
 An interface will appear showing results as they load, letting you track the agent's progress as it runs.
 
-<p align="center">
-  <img src="assets/cli/cli_news.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-<p align="center">
-  <img src="assets/cli/cli_transaction.png" width="100%" style="display: inline-block; margin: 0 2%;">
-</p>
-
-## TradingAgents Package
+## Dùng như thư viện Python
 
 ### Implementation Details
 
-We built TradingAgents with LangGraph to ensure flexibility and modularity. The framework supports multiple LLM providers: OpenAI, Google, Anthropic, xAI, DeepSeek, Qwen (Alibaba DashScope, international and China endpoints), GLM (Zhipu), MiniMax (global + China), OpenRouter, Ollama for local models, Azure OpenAI for enterprise, and your own ChatGPT plan.
+RevidAPI Trading Agents is built on LangGraph for flexibility and modularity. The framework supports multiple LLM providers: OpenAI, Google, Anthropic, xAI, DeepSeek, Qwen (Alibaba DashScope, international and China endpoints), GLM (Zhipu), MiniMax (global + China), OpenRouter, Ollama for local models, Azure OpenAI for enterprise, and your own ChatGPT plan.
 
 ### Python Usage
 
-To use TradingAgents inside your code, you can import the `tradingagents` module and initialize a `TradingAgentsGraph()` object. The `.propagate()` function will return a decision. You can run `main.py`, here's also a quick example:
+To use RevidAPI Trading Agents inside your code, you can import the `tradingagents` module and initialize a `TradingAgentsGraph()` object. The `.propagate()` function will return a decision. You can run `main.py`, here's also a quick example:
 
 ```python
 from tradingagents.graph.trading_graph import TradingAgentsGraph
@@ -371,17 +276,17 @@ portfolio = PortfolioContext.model_validate({
 _, decision = ta.propagate("NVDA", "2026-09-01", portfolio=portfolio)
 ```
 
-The CLI takes the same content as a JSON file: `tradingagents --portfolio my_book.json`.
+The CLI takes the same content as a JSON file: `revidapi-trade --portfolio my_book.json`.
 
 An empty `positions` list means a flat book, which is different from passing nothing. A run without a portfolio is never treated as flat.
 
 ## Persistence and Recovery
 
-TradingAgents persists two kinds of state across runs.
+RevidAPI Trading Agents persists two kinds of state across runs.
 
 ### Memory log
 
-The memory log is always on. Each completed run appends its decision to `~/.tradingagents/memory/trading_memory.md`. While the analysts of a later run work, TradingAgents settles every logged decision whose holding period has passed: it fetches the realised return (raw, and alpha against the instrument's regional benchmark) and generates a one-paragraph reflection. The Portfolio Manager then reads the most recent decisions for the same ticker plus recent lessons from other tickers, so each analysis carries forward what worked and what didn't. If settling fails, the run goes on and its report says so.
+The memory log is always on. Each completed run appends its decision to `~/.tradingagents/memory/trading_memory.md`. While the analysts of a later run work, RevidAPI Trading Agents settles every logged decision whose holding period has passed: it fetches the realised return (raw, and alpha against the instrument's regional benchmark) and generates a one-paragraph reflection. The Portfolio Manager then reads the most recent decisions for the same ticker plus recent lessons from other tickers, so each analysis carries forward what worked and what didn't. If settling fails, the run goes on and its report says so.
 
 Override the path with `TRADINGAGENTS_MEMORY_LOG_PATH`.
 
@@ -394,8 +299,8 @@ Checkpoint resume is opt-in via `--checkpoint`. When enabled, LangGraph saves st
 Per-ticker SQLite databases live at `~/.tradingagents/cache/checkpoints/<TICKER>.db` (override the base with `TRADINGAGENTS_CACHE_DIR`). Use `--clear-checkpoints` to reset all of them before a run.
 
 ```bash
-tradingagents --checkpoint           # enable for this run
-tradingagents --clear-checkpoints    # reset before running
+revidapi-trade --checkpoint           # enable for this run
+revidapi-trade --clear-checkpoints    # reset before running
 ```
 
 ```python
@@ -420,14 +325,14 @@ print(summarize(result).render())
 From the CLI:
 
 ```bash
-tradingagents backtest NVDA,AAPL --start 2026-06-01 --end 2026-08-01 --every 7
+revidapi-trade backtest NVDA,AAPL --start 2026-06-01 --end 2026-08-01 --every 7
 ```
 
 Each cell is scored on realized alpha against the instrument's regional benchmark, grouped by rating. A decision is entered at the first close after its date, because a run reads news published after that day's close. Your own memory log is never written to, and re-running the same grid with `run_id=result.run_id` skips the cells that already ran, so an interrupted sweep continues where it stopped.
 
 ## Reproducibility
 
-TradingAgents is LLM-driven, so two runs of the same ticker and date can differ. This is expected for a research tool built on language models, not a defect. The variation comes from a few distinct sources, and it helps to separate them.
+RevidAPI Trading Agents is LLM-driven, so two runs of the same ticker and date can differ. This is expected for a research tool built on language models, not a defect. The variation comes from a few distinct sources, and it helps to separate them.
 
 Language model sampling is non-deterministic. Even at a fixed temperature, providers do not guarantee byte-identical output across calls, and reasoning models (the default GPT-6 family, and any thinking-mode model) vary the most because their internal reasoning is itself sampled.
 
@@ -447,22 +352,9 @@ What does not vary anymore: the analyzed company identity is resolved determinis
 
 Backtest results are not guaranteed to match any published figure. Returns depend on the model, the temperature, the date range, data quality, and the sampling above. Treat the framework as a research scaffold for studying multi-agent analysis, not as a strategy with a fixed, replicable return.
 
-## Contributing
 
-Contributions are welcome: bug fixes, documentation, and feature ideas; past contributions are credited per release in [`CHANGELOG.md`](CHANGELOG.md).
+## Nguồn gốc và giấy phép
 
-## Citation
+Dự án dựa trên mã nguồn mở [TradingAgents](https://github.com/TauricResearch/TradingAgents) (Apache-2.0), được RevidAPI chỉnh để mọi agent chạy qua một key và bổ sung provider `revidapi`. Giấy phép gốc giữ nguyên trong [LICENSE](LICENSE). Bài báo gốc: [arXiv:2412.20138](https://arxiv.org/abs/2412.20138).
 
-Please reference our work if you find *TradingAgents* provides you with some help :)
-
-```
-@misc{xiao2025tradingagentsmultiagentsllmfinancial,
-      title={TradingAgents: Multi-Agents LLM Financial Trading Framework}, 
-      author={Yijia Xiao and Edward Sun and Di Luo and Wei Wang},
-      year={2025},
-      eprint={2412.20138},
-      archivePrefix={arXiv},
-      primaryClass={q-fin.TR},
-      url={https://arxiv.org/abs/2412.20138}, 
-}
-```
+Hỗ trợ và key: [revidapi.com](https://revidapi.com)

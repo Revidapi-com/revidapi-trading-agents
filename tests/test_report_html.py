@@ -142,11 +142,11 @@ def test_the_page_heading_is_the_ticker_and_its_rating(tmp_path):
 def test_the_header_carries_the_official_logo_unaltered(tmp_path):
     from importlib.resources import files
 
-    logo = files("tradingagents").joinpath("assets/tauric-logo.svg").read_text(encoding="utf-8").strip()
+    logo = files("tradingagents").joinpath("assets/revidapi-logo.svg").read_text(encoding="utf-8").strip()
     page = _html(tmp_path)
     header = page[page.index("<header"):page.index("</header>")]
     assert logo in header                           # drawn in the page, nothing fetched
-    assert 'href="https://tauric.ai"' in header and 'aria-label="Tauric Research"' in header
+    assert 'href="https://revidapi.com"' in header and 'aria-label="RevidAPI"' in header
     assert header.index('class="logo"') < header.index("<h1")   # leads the header, above the title
 
 
@@ -154,10 +154,9 @@ def test_the_header_carries_the_official_logo_unaltered(tmp_path):
 def test_the_page_credits_its_maker_in_a_line_of_text(tmp_path):
     page = _html(tmp_path)
     footer = page[page.index('<footer class="credit">'):page.index("</footer>")]
-    assert re.sub(r"<[^>]+>", "", footer).split() == ["TradingAgents", "powered", "by", "Tauric", "Research"]
-    # The logo already leads to tauric.ai; the credit leads to the project and the org.
-    assert 'href="https://github.com/TauricResearch/TradingAgents"' in footer
-    assert 'href="https://github.com/TauricResearch"' in footer and "tauric.ai" not in footer
+    assert re.sub(r"<[^>]+>", "", footer).split() == ["RevidAPI", "Trading", "Agents", "powered", "by", "RevidAPI"]
+    assert 'href="https://github.com/Revidapi-com/revidapi-trading-agents"' in footer
+    assert 'href="https://revidapi.com"' in footer
     assert "<svg" not in footer and 'class="brand"' in footer
     assert page.index("</main>") < page.index('<footer class="credit">')
 
@@ -168,7 +167,7 @@ def test_the_packaged_logo_stays_inert(tmp_path):
     # no script, event handler, link, embedded document or external reference.
     from importlib.resources import files
 
-    logo = files("tradingagents").joinpath("assets/tauric-logo.svg").read_text(encoding="utf-8")
+    logo = files("tradingagents").joinpath("assets/revidapi-logo.svg").read_text(encoding="utf-8")
     tags = set(re.findall(r"<\s*([a-zA-Z][\w:-]*)", logo))
-    assert tags <= {"svg", "path", "rect", "circle", "g", "defs", "clipPath", "linearGradient", "stop"}
+    assert tags <= {"svg", "path", "rect", "circle", "g", "defs", "clipPath", "linearGradient", "stop", "text", "tspan"}
     assert not re.search(r"\son\w+\s*=|href|url\(|@import|javascript:|<!entity|<!doctype", logo, re.IGNORECASE)

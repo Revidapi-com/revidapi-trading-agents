@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tradingagents"
+name = "revidapi-trading-agents"
 dynamic = ["version"]
-description = "TradingAgents: Multi-Agents LLM Financial Trading Framework"
+description = "RevidAPI Trading Agents: multi-agent LLM trading analysis, one RevidAPI key for every model"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -43,6 +43,7 @@ bedrock = [
 ]
 
 [project.scripts]
+revidapi-trade = "cli.main:app"
 tradingagents = "cli.main:app"
 
 [tool.setuptools.dynamic]
