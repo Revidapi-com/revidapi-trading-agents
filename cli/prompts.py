@@ -327,15 +327,16 @@ _REVIDAPI_SKIP = ("codex-",)
 
 
 def select_revidapi_model(mode: str, default=None) -> str:
-    """Select a RevidAPI chat model (listed live from /v1/models) or enter one."""
+    """Select a RevidAPI chat model (listed live from /v1/chat/models) or enter one."""
     import requests
     try:
-        resp = requests.get("https://revidapi.com/v1/models", timeout=10)
+        # /v1/chat/models lists exactly the chat models on sale right now.
+        resp = requests.get("https://revidapi.com/v1/chat/models", timeout=10)
         resp.raise_for_status()
-        # The list also carries image models; keep available chat models only.
-        models = [(m.get("display_name") or m["id"], m["id"]) for m in resp.json().get("data", [])
-                  if m.get("kind") == "chat" and m.get("available", True)
-                  and not m["id"].startswith(_REVIDAPI_SKIP)]
+        data = resp.json()
+        data = data.get("data", []) if isinstance(data, dict) else data
+        ids = [m["id"] if isinstance(m, dict) else m for m in data]
+        models = [(mid, mid) for mid in ids if not mid.startswith(_REVIDAPI_SKIP)]
     except Exception as e:
         console.print(f"\n[yellow]Could not fetch RevidAPI models: {e}[/yellow]")
         models = []

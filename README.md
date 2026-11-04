@@ -63,11 +63,11 @@ Any chat model RevidAPI sells works with the same key, for example:
 | Role | Good picks |
 |---|---|
 | Deep thinking | `claude-opus-5-5`, `claude-fable-5-1`, `gpt-6.1-sol`, `grok-4.7`, `deepseek-v4-pro` |
-| Quick thinking | `claude-sonnet-5-5`, `claude-haiku-5-5`, `gpt-6-luna`, `gemini-3.8-flash`, `deepseek-v4.1-flash` |
+| Quick thinking | `claude-sonnet-5-5`, `claude-haiku-5-5`, `gpt-6-luna`, `gemini-3.7-flash`, `deepseek-v4.1-flash` |
 
 Never commit your key: keep it in `.env` (already git-ignored) or your shell environment.
 
-The same switch works with environment variables only: `TRADINGAGENTS_LLM_PROVIDER=revidapi`, `TRADINGAGENTS_DEEP_THINK_LLM=...`, `TRADINGAGENTS_QUICK_THINK_LLM=...`. The full model list is public at [revidapi.com/v1/models](https://revidapi.com/v1/models). Market data still comes from the upstream sources (yfinance, Alpha Vantage, SEC EDGAR, FRED).
+The same switch works with environment variables only: `TRADINGAGENTS_LLM_PROVIDER=revidapi`, `TRADINGAGENTS_DEEP_THINK_LLM=...`, `TRADINGAGENTS_QUICK_THINK_LLM=...`. The full model list is public at [revidapi.com/v1/chat/models](https://revidapi.com/v1/chat/models). Market data still comes from the upstream sources (yfinance, Alpha Vantage, SEC EDGAR, FRED).
 
 
 # TradingAgents: Multi-Agents LLM Financial Trading Framework

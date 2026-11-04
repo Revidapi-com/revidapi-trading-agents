@@ -124,13 +124,13 @@ MODEL_OPTIONS: ProviderModeOptions = {
     },
     "google": {
         "quick": [
-            ("Gemini 3.8 Flash - Most capable Flash", "gemini-3.8-flash"),
+            ("Gemini 3.7 Flash - Most capable Flash", "gemini-3.7-flash"),
             ("Gemini 3.5 Flash Lite - Fast and cost-efficient", "gemini-3.5-flash-lite"),
             ("Gemini 3.1 Flash Lite - Most cost-efficient", "gemini-3.1-flash-lite"),
             ("Custom model ID", "custom"),
         ],
         "deep": [
-            ("Gemini 3.8 Flash - Most capable Flash, 1M context", "gemini-3.8-flash"),
+            ("Gemini 3.7 Flash - Most capable Flash, 1M context", "gemini-3.7-flash"),
             ("Gemini 3.1 Pro - Reasoning-first, complex workflows (preview)", "gemini-3.1-pro-preview"),
             ("Gemini 3.5 Flash - Previous Flash, strong agentic + coding", "gemini-3.5-flash"),
             ("Custom model ID", "custom"),
@@ -202,13 +202,13 @@ MODEL_OPTIONS: ProviderModeOptions = {
     # Generic OpenAI-compatible endpoint: the model is whatever the user's
     # server serves, so only "Custom model ID" is offered.
     "openai_compatible": _CUSTOM_ONLY,
-    # Offline fallback; the CLI lists the current models live from /v1/models.
+    # Offline fallback; the CLI lists the current models live from /v1/chat/models.
     "revidapi": {
         "quick": [
             ("Claude Sonnet 5.5", "claude-sonnet-5-5"),
             ("Claude Haiku 5.5", "claude-haiku-5-5"),
             ("GPT-6 Luna", "gpt-6-luna"),
-            ("Gemini 3.8 Flash", "gemini-3.8-flash"),
+            ("Gemini 3.7 Flash", "gemini-3.7-flash"),
             ("DeepSeek V4.1 Flash", "deepseek-v4.1-flash"),
             ("Custom model ID", "custom"),
         ],
